@@ -1,5 +1,5 @@
 
-from constants.urls import URL
+from stripe.constants.urls import URL
 
 class Client:
     """Razorpay client class"""
