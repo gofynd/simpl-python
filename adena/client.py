@@ -25,10 +25,12 @@ class Client:
     def check_simpl_approval(self, payload):
         approval_url = "{}{}".format(self.DEFAULTS["base_url"],URL.SIMPL_USER_APPROVAL)
         logger.debug("Client | check_simpl_approval | approval_url:{}".format(approval_url))
+        print("Client | check_simpl_approval | approval_url:{}".format(approval_url))
 
         headers = {"authorization": self._client_secret}
-        response =  self._request_caller.get(url=approval_url, headers=headers)
+        response =  self._request_caller.post(url=approval_url, headers=headers, payload=payload)
 
         logger.debug("Client | check_simpl_approval | response:{}".format(response))
+        print("Client | check_simpl_approval | response:{}".format(response))
         return response
 

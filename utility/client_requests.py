@@ -1,5 +1,6 @@
 import logging
 import requests
+import json
 
 from adena.exceptions import ClientIdMissingException
 
@@ -23,13 +24,14 @@ class RequestCaller(SimplUtility):
     """
 
     def __init__(self, **kwargs):
-        super.__init__(**kwargs)
+        super(RequestCaller, self).__init__(**kwargs)
         logger.debug("RequestCaller | initialized | client-id:{}".format(self._client_id))
 
-    def get(self, url, payload=None, headers=None):
-        logger.info("RequestCaller | get | payload:{}".format(payload))
-        logger.info("RequestCaller | get | headers:{}".format(headers))
-        logger.info("RequestCaller | get | url:{}".format(url))
+    def post(self, url, payload=None, headers=None):
+        logger.info("RequestCaller | post | payload:{}".format(payload))
+        logger.info("RequestCaller | post | headers:{}".format(headers))
+        logger.info("RequestCaller | post | url:{}".format(url))
+        print("RequestCaller | post | payload:{}".format(payload))
 
-        data = requests.get(url=url, headers=headers, params=payload)
+        data = requests.post(url=url, headers=headers, data=json.dumps(payload))
         return data
