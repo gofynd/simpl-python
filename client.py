@@ -1,8 +1,8 @@
 
-from stripe.constants.urls import URL
+from adena.constants.urls import URL
 
 class Client:
-    """Razorpay client class"""
+    """Adena client class"""
 
     DEFAULTS = {
         'base_url': URL.BASE_URL
