@@ -1,0 +1,4 @@
+
+
+class ClientIdMissingException(Exception):
+    pass
