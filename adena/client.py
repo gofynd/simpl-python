@@ -1,4 +1,3 @@
-
 import logging
 
 from adena.constants.urls import URL
@@ -21,7 +20,6 @@ class Client:
         self._is_prod = is_prod
         self._request_caller = RequestCaller(client_id=self._client_secret)
 
-
     def check_simpl_approval(self, payload):
         approval_url = "{}{}".format(self.DEFAULTS["base_url"],URL.SIMPL_USER_APPROVAL)
         logger.debug("Client | check_simpl_approval | approval_url:{}".format(approval_url))
@@ -32,5 +30,5 @@ class Client:
 
         logger.debug("Client | check_simpl_approval | response:{}".format(response))
         print("Client | check_simpl_approval | response:{}".format(response))
-        return response
+        return response.json()
 

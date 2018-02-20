@@ -6,7 +6,8 @@ from adena.exceptions import ClientIdMissingException
 
 logger = logging.getLogger(__name__)
 
-class SimplUtility:
+
+class SimplUtility(object):
     """
         Utility class
     """
