@@ -14,8 +14,6 @@ def mock_file(filename):
 class ClientTestCase(unittest.TestCase):
     def setUp(self):
         self.client = adena.Client(client_secret="dcd0cad031b773aabaed11e23a5b43db")
-        self.urls = adena.URL
-        self.secondary_url = 'https://test-api.razorpay.com/v1'
         self.payment_id = 'fake_payment_id'
         self.refund_id = 'fake_refund_id'
         self.card_id = 'fake_card_id'
@@ -24,5 +22,6 @@ class ClientTestCase(unittest.TestCase):
         self.addon_id = 'fake_addon_id'
         self.subscription_id = 'fake_subscription_id'
         self.plan_id = 'fake_plan_id'
+        self.urls = adena.URL
 
         self.secondary_client = adena.Client(client_secret="dcd0cad031b773aabaed11e23a5b43db")

@@ -1,34 +1,43 @@
 import logging
 
-from adena.constants.urls import URL
-from utility.client_requests import RequestCaller
-
+from types import ModuleType
 
 logger = logging.getLogger(__name__)
+from adena.exceptions import ClientIdMissingException
+
+from . import resources, utility
+
+def capitalize_camel_case(string):
+    return "".join(map(str.capitalize, string.split('_')))
 
 
-class Client:
+# Create a dict of resource classes
+RESOURCE_CLASSES = {}
+for name, module in resources.__dict__.items():
+    if isinstance(module, ModuleType) and \
+            capitalize_camel_case(name) in module.__dict__:
+        RESOURCE_CLASSES[name] = module.__dict__[capitalize_camel_case(name)]
+
+UTILITY_CLASSES = {}
+for name, module in utility.__dict__.items():
+    if isinstance(module, ModuleType) and name.capitalize() in module.__dict__:
+        UTILITY_CLASSES[name] = module.__dict__[name.capitalize()]
+
+
+class Client(object):
     """Adena client class"""
 
-    DEFAULTS = {
-        'base_url': URL.BASE_URL + URL.VERSION
-    }
+    def __init__(self, **options):
+        self._client_secret = options.get("client_secret", None)
+        self._is_debug = options.get("is_debug", None)
+        self._is_prod = options.get("is_prod", None)
+        self._client_secret = options.get("client_secret", None)
 
-    def __init__(self, client_secret, is_debug=False, is_prod=False, **options):
-        self._client_secret = client_secret
-        self._is_debug = is_debug
-        self._is_prod = is_prod
-        self._request_caller = RequestCaller(client_id=self._client_secret)
+        for name, Klass in RESOURCE_CLASSES.items():
+            setattr(self, name, Klass(self))
 
-    def check_simpl_approval(self, payload):
-        approval_url = "{}{}".format(self.DEFAULTS["base_url"],URL.SIMPL_USER_APPROVAL)
-        logger.debug("Client | check_simpl_approval | approval_url:{}".format(approval_url))
-        print("Client | check_simpl_approval | approval_url:{}".format(approval_url))
+        for name, Klass in UTILITY_CLASSES.items():
+            setattr(self, name, Klass(self))
 
-        headers = {"authorization": self._client_secret}
-        response =  self._request_caller.post(url=approval_url, headers=headers, payload=payload)
-
-        logger.debug("Client | check_simpl_approval | response:{}".format(response))
-        print("Client | check_simpl_approval | response:{}".format(response))
-        return response.json()
-
+        if not self._client_secret:
+            raise ClientIdMissingException
