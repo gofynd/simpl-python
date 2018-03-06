@@ -1,9 +1,16 @@
 import logging
+import requests
+import json
 
 from types import ModuleType
 
-logger = logging.getLogger(__name__)
-from adena.exceptions import ClientIdMissingException
+from adena.custom_logging import MyLogger
+
+logging.setLoggerClass(MyLogger)
+logging.basicConfig()
+global_logger = logging.getLogger(__name__)
+
+from adena.exceptions import ClientSecretMissingException
 
 from . import resources, utility
 
@@ -23,7 +30,6 @@ for name, module in utility.__dict__.items():
     if isinstance(module, ModuleType) and name.capitalize() in module.__dict__:
         UTILITY_CLASSES[name] = module.__dict__[name.capitalize()]
 
-
 class Client(object):
     """Adena client class"""
 
@@ -33,11 +39,26 @@ class Client(object):
         self._is_prod = options.get("is_prod", None)
         self._client_secret = options.get("client_secret", None)
 
+        logger = options.get("logger", None)
+        self.logger = logger
+        if not logger:
+            self.logger = global_logger
+
         for name, Klass in RESOURCE_CLASSES.items():
-            setattr(self, name, Klass(self))
+            setattr(self, name, Klass(**{"client": self}))
 
         for name, Klass in UTILITY_CLASSES.items():
-            setattr(self, name, Klass(self))
+            setattr(self, name, Klass(**{"client": self}))
 
         if not self._client_secret:
-            raise ClientIdMissingException
+            raise ClientSecretMissingException
+
+    def post(self, url, payload=None, headers=None):
+        self.logger.info("Client | post | payload:{}".format(payload))
+        self.logger.info("Client | post | headers:{}".format(headers))
+        self.logger.info("Client | post | url:{}".format(url))
+
+        response = requests.post(url=url, headers=headers, data=json.dumps(payload))
+
+        self.logger.info("Client | post | response:{}".format(response))
+        return response

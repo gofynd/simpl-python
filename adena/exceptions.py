@@ -1,4 +1,4 @@
 
 
-class ClientIdMissingException(Exception):
+class ClientSecretMissingException(Exception):
     pass

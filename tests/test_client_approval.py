@@ -1,8 +1,11 @@
+
 import responses
 import json
 
 from .helpers import mock_file, ClientTestCase
 
+# run test as:
+# python -m unittest discover
 
 class TestClientApproval(ClientTestCase):
 
@@ -25,4 +28,4 @@ class TestClientApproval(ClientTestCase):
         url = self.urls.SIMPL_USER_APPROVAL
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
-        self.assertEqual(self.client.payment.check_simpl_approval(payload=self.payload).json(), result)
+        self.assertEqual(self.client.approval.check_simpl_approval(payload=self.payload).json(), result)
