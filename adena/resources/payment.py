@@ -8,6 +8,8 @@ class Payment(BaseResource):
 
     def __init__(self, *args, **kwargs):
         super(Payment, self).__init__(kwargs)
+        self.URL = URL(is_prod=self.client._is_prod)
+
 
     def charge_token(self, payload):
         """
@@ -109,7 +111,7 @@ class Payment(BaseResource):
                 }
         """
 
-        charge_url = URL.SIMPL_CHARGE_TOKEN
+        charge_url = self.URL.SIMPL_CHARGE_TOKEN
 
         self.client.logger.debug("Payment | charge_token | payload:{}".format(payload))
         self.client.logger.debug("Payment | charge_token | charge_url:{}".format(charge_url))

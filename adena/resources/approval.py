@@ -8,6 +8,7 @@ class Approval(BaseResource):
 
     def __init__(self, *args, **kwargs):
         super(Approval, self).__init__(kwargs)
+        self.URL = URL(is_prod=self.client._is_prod)
 
     def check_simpl_approval(self, payload):
         """
@@ -35,7 +36,7 @@ class Approval(BaseResource):
                     }
         """
 
-        approval_url = URL.SIMPL_USER_APPROVAL
+        approval_url = self.URL.SIMPL_USER_APPROVAL
 
         self.client.logger.debug("Approval | check_simpl_approval | payload:{}".format(payload))
         self.client.logger.debug("Approval | check_simpl_approval | approval_url:{}".format(approval_url))

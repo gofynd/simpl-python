@@ -34,6 +34,6 @@ class ClientTestCase(unittest.TestCase):
         self.addon_id = 'fake_addon_id'
         self.subscription_id = 'fake_subscription_id'
         self.plan_id = 'fake_plan_id'
-        self.urls = adena.URL
+        self.urls = adena.URL(is_prod=self.client._is_prod)
 
         self.secondary_client = adena.Client(client_secret="dcd0cad031b773aabaed11e23a5b43db")

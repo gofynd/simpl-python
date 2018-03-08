@@ -58,7 +58,21 @@ class Client(object):
         self.logger.info("Client | post | headers:{}".format(headers))
         self.logger.info("Client | post | url:{}".format(url))
 
+        content_type = headers.get("content-type", None)
+        if not content_type:
+            headers["content-type"] = "application/json"
         response = requests.post(url=url, headers=headers, data=json.dumps(payload))
+
+        # changed as per simpl python code scippet
+        # reference: https://sandbox.getsimpl.com/docs/web/custom#step-final-charge-transaction-token (check python-code sample)
+        # domain = URL.DOMAIN_URL
+        # if self.is_approval_flow:
+        #     domain = URL.APPROVAL_DOMAIN_URL
+        # conn = http.client.HTTPSConnection(domain)
+        # conn.request("POST", "{}{}{}".format(URL.MIDDLEWARE, URL.PREV_VERSION, URL.SIMPL_CHARGE_TOKEN), payload, headers)
+        # res = conn.getresponse()
+        # data = res.read()
+        # response = data.decode("utf-8")
 
         self.logger.info("Client | post | response:{}".format(response))
         return response
