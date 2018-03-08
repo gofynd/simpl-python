@@ -1,3 +1,5 @@
+import json
+
 from adena.constants.urls import URL
 from adena.resources.base import BaseResource
 
@@ -41,6 +43,6 @@ class Approval(BaseResource):
         headers = {"authorization": self.client._client_secret}
         response = self.client.post(url=approval_url, headers=headers, payload=payload)
 
-        self.client.logger.debug("Approval | check_simpl_approval | response:{}".format(response))
+        self.client.logger.debug("Approval | check_simpl_approval | response:{}".format(json.loads(response.text)))
 
         return response

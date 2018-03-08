@@ -1,3 +1,5 @@
+import json
+
 from adena.constants.urls import URL
 from adena.resources.base import BaseResource
 
@@ -115,6 +117,6 @@ class Payment(BaseResource):
         headers = {"authorization": self.client._client_secret}
         response = self.client.post(url=charge_url, headers=headers, payload=payload)
 
-        self.client.logger.debug("Payment | charge_token | response:{}".format(response))
+        self.client.logger.debug("Payment | charge_token | response:{}".format(json.loads(response.text)))
 
         return response
