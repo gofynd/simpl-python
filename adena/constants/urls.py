@@ -13,6 +13,8 @@ class URL(object):
     SIMPL_USER_APPROVAL = "{}{}{}".format(APPROVAL_BASE_URL, VERSION, "/simpl_buy/server/approved")
     SIMPL_CHARGE_TOKEN_ENDPOINT = "/transactions"
     SIMPL_CHARGE_TOKEN = "{}{}{}".format(BASE_URL, PREV_VERSION, SIMPL_CHARGE_TOKEN_ENDPOINT)
+    SIMPL_REFUND_TOKEN_ENDPOINT = "/refund"
+    SIMPL_REFUND_TRANSACTION = "{}{}".format(SIMPL_CHARGE_TOKEN, SIMPL_REFUND_TOKEN_ENDPOINT)
 
     def __init__(self, is_prod):
         self.is_prod = is_prod
