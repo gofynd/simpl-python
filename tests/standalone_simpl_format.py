@@ -1,7 +1,7 @@
 import http.client
 import json
 
-from adena import URL
+from simpl import URL
 
 conn = http.client.HTTPSConnection(URL.DOMAIN_URL)
 

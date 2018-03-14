@@ -4,13 +4,13 @@ import json
 
 from types import ModuleType
 
-from adena.custom_logging import MyLogger
+from simpl.custom_logging import MyLogger
 
 logging.setLoggerClass(MyLogger)
 logging.basicConfig()
 global_logger = logging.getLogger(__name__)
 
-from adena.exceptions import ClientSecretMissingException
+from simpl.exceptions import ClientSecretMissingException
 
 from . import resources, utility
 

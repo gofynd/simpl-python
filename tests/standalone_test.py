@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from adena.constants.urls import URL
+from simpl.constants.urls import URL
 
 url = "{}{}{}{}{}".format(URL.HTTPS_URL, URL.DOMAIN_URL, URL.MIDDLEWARE, URL.PREV_VERSION, URL.SIMPL_CHARGE_TOKEN_ENDPOINT)
 print(url)

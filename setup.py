@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
-setup(name='adena',
+setup(name='simple-python',
     version='0.0.1',
     description='Simpl Python Client',
-    url='https://gitlab.com/fynd/adena',
+    url='https://gitlab.com/fynd/simpl-python',
     author='Gofynd Ops Engineering Team',
     author_email='aggregators@gofynd.com',
     packages=find_packages(".", exclude="tests"),

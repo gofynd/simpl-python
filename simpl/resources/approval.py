@@ -1,7 +1,7 @@
 import json
 
-from adena.constants.urls import URL
-from adena.resources.base import BaseResource
+from simpl.constants.urls import URL
+from simpl.resources.base import BaseResource
 
 
 class Approval(BaseResource):
