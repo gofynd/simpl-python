@@ -37,7 +37,6 @@ class Client(object):
         self._client_secret = options.get("client_secret", None)
         self._is_debug = options.get("is_debug", None)
         self._is_prod = options.get("is_prod", None)
-        self._client_secret = options.get("client_secret", None)
 
         logger = options.get("logger", None)
         self.logger = logger
