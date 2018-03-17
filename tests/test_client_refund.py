@@ -20,7 +20,8 @@ class TestClientRefund(ClientTestCase):
     @responses.activate
     def test_charge(self):
         result = mock_file('make_refund')
-        url = self.urls.SIMPL_CHARGE_TOKEN
+        url = self.urls.SIMPL_REFUND_TRANSACTION
         responses.add(responses.POST, url, status=200, body=json.dumps(result),
                       match_querystring=True)
+
         self.assertEqual(self.client.refund.make_refund(payload=self.payload).json(), result)
