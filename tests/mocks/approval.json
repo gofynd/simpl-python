@@ -1,9 +1,0 @@
-{
-  "success": true,
-  "data": {
-    "approved": true,
-    "button_text": "Simpl Pay",
-    "first_transaction": true
-  },
-  "api_version": 2
-}

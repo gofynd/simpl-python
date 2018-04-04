@@ -1,8 +1,0 @@
-{
-  "success": true,
-  "data": {
-    "transaction_id": "18CF6118-AD0A-4F9B-BD41-5C8A3C42FCE7",
-    "refunded_transaction_id": "aa5e47e3-880f-4d24-8d16-38c0f3be3608"
-  },
-  "api_version": 1.1
-}
