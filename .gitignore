@@ -4,8 +4,5 @@
 *.jpg
 .vagrant
 .idea
-avis/media/*.png
-avis/media/invoice_labels/*.pdf
-avis/deployment/ansible/vault_pass.txt
 *.retry
 .kitchen
